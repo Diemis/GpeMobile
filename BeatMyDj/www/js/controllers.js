@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ui.calendar'])
 
 .controller('DashCtrl', function($scope, Chats) {
     $scope.chats = Chats.all();
@@ -24,6 +24,20 @@ angular.module('starter.controllers', [])
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
     $scope.chat = Chats.get($stateParams.chatId);
+    $scope.uiConfig = {
+        calendar:{
+            height: 450,
+            editable: true,
+            header:{
+                left: 'agendaWeek agendaDay',
+                center: 'title',
+                right: 'today prev,next'
+            },
+            eventClick: $scope.alertEventOnClick,
+            eventDrop: $scope.alertOnDrop,
+            eventResize: $scope.alertOnResize
+        }
+    };
     $scope.eventSources = [];
 })
 
